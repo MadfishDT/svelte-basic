@@ -3,66 +3,80 @@
         PrimaryAction,
         Content,
         Actions,
-        ActionButtons,
         ActionIcons,
     } from "@smui/card";
-    import Button, { Label } from "@smui/button";
     import IconButton from "@smui/icon-button";
     import { Icon } from "@smui/common";
     import type { iTodo } from "./interface";
+    import { favorite } from './store'
     import moment from 'moment';
-    export let Info: iTodo | undefined = undefined;
+    export let info: iTodo | undefined = undefined;
+
+    export let favoriteToggle = info ? info.favorite : false
+    export let checkedToggle = info ? info.selected: false
+    
 </script>
 
 <main>
     <div class="card-display">
         <div class="card-container">
             <Card>
-                <Actions>
+                <div class="flexor" style="margin-left: 10px; margin-top:5px;">
+                    <span style="font-size:10px;">
+                    {#if info && info.desc}
+                        {moment(info.date).format('YYYY-MM-DD HH:mm:ss')}
+                    {/if}
+                     </span>
+                </div>
+                <Actions style="padding-top:0px;">
                     <div style="text-align: left;">
                              <h2
                                 class="mdc-typography--headline6"
                                 style="margin: 0;"
                             >
-                                {#if Info && Info.name}
-                                    {Info.name}
+                                {#if info && info.name}
+                                    {info.name}
                                 {/if}
                             </h2>
                             
                         </div>
                     <ActionIcons>
                         <IconButton
-                            toggle
                             aria-label="Add to favorites"
                             title="Add to favorites"
+                            on:click={() => {
+                                favoriteToggle = !favoriteToggle;
+                                if(favoriteToggle) favorite(info)
+                            }}
                         >
-                            <Icon class="material-icons" on>favorite</Icon>
-                            <Icon class="material-icons">favorite_border</Icon>
+                            {#if favoriteToggle}
+                                <Icon class="material-icons" >favorite</Icon>
+                            {:else}
+                                <Icon class="material-icons">favorite_border</Icon>
+                            {/if}
                         </IconButton>
                         <IconButton
-                            toggle
                             aria-label="Add to favorites"
                             title="Add to favorites"
-                        >
-                            <Icon class="material-icons" on>bookmark</Icon>
-                            <Icon class="material-icons">bookmark_border</Icon>
+                            on:click={() => checkedToggle = !checkedToggle}
+                            >
+                            {#if checkedToggle}
+                                <Icon class="material-icons" >check_box</Icon>
+                            {:else}
+                                <Icon class="material-icons">check_box_outline_blank</Icon>
+                            {/if}
+                            
                         </IconButton>
 
-                        <IconButton class="material-icons" title="Share"
-                            >share</IconButton
-                        >
+                       
                     </ActionIcons>
                 </Actions>
-                <div class="flexor" >
-                    {#if Info && Info.desc}
-                        {moment(Info.date).format('YYYY-MM-DD HH:mm:ss')}
-                    {/if}
-                </div>
+                
                 <PrimaryAction>
                     <Content class="mdc-typography--body2">
                         <div class="flexor">
-                            {#if Info && Info.desc}
-                                {Info.desc}
+                            {#if info && info.desc}
+                                {info.desc}
                             {/if}
                         </div>
                     </Content>

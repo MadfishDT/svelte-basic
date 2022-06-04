@@ -68,7 +68,7 @@
                 </Section>
             </Row>
         </TopAppBar>
-        <div>
+        <div class="content-container">
             <Router {routes} />
         </div>
     </div>
@@ -86,6 +86,17 @@
         max-width: 480px;
         width: 100%;
         height: 80%;
+        border: 1px solid
+            var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.1));
+        background-color: var(--mdc-theme-background, #fff);
+        overflow-y: hidden;
+        overflow-x: hidden;
+        display: inline-block;
+    }
+    .content-container {
+        max-width: 480px;
+        width: 100%;
+        height:100%;
         border: 1px solid
             var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.1));
         background-color: var(--mdc-theme-background, #fff);

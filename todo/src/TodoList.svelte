@@ -12,7 +12,7 @@
 
 <main>
     {#each todos as item}
-        <TodoCard Info={item} />
+        <TodoCard info={item} />
     {/each}
 </main>
 
