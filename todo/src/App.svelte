@@ -6,8 +6,10 @@
 
     import TopAppBar, { Row, Section, Title } from "@smui/top-app-bar";
     import IconButton from "@smui/icon-button";
-
-    import { datas } from "./store";
+    import NewTodoDialog from "./NewDialog.svelte"
+  
+    
+    import { datas, openDialog } from "./store";
 
     export let prominent = false;
     export let dense = false;
@@ -47,18 +49,20 @@
 
 <main>
     <div class="top-app-bar-container flexor">
+        <NewTodoDialog />
+
         <TopAppBar
             variant="static"
             {prominent}
             {dense}
             color={secondaryColor ? "secondary" : "primary"}
-        >
+        >   
             <Row>
                 <Section>
                     <Title>Mad Todos</Title>
                 </Section>
                 <Section align="end" toolbar>
-                    <IconButton class="material-icons" aria-label="add_todo"
+                    <IconButton class="material-icons" aria-label="add_todo" on:click={() => openDialog()}
                         >add</IconButton
                     >
                     <IconButton
