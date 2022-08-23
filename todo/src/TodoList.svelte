@@ -6,7 +6,7 @@
     let todos: Todos = [];
 
     datas.subscribe((value) => {
-        todos = value;
+        todos = [...value].reverse();
     });
 </script>
 

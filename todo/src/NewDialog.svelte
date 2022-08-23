@@ -19,7 +19,7 @@
                 desc: desc,
                 name: name,
                 date: new Date(Date.now()),
-                selected: true,
+                selected: false,
             };
             name = "";
             addTodo(todo);
@@ -36,6 +36,7 @@
     const onClose = () => {
         name = "";
         desc = "";
+
         closeDialog();
     };
     openNewTodoDialog.subscribe((value: boolean) => {
@@ -48,7 +49,7 @@
     aria-labelledby="buttons-title"
     aria-describedby="buttons-content"
     autoStackButtons={false}
-    on:SMUIDialog:closed={(e) => (buttoned = e.detail.action)}
+    on:SMUIDialog:closed={(e) => ($openNewTodoDialog = false)}
 >
     <Title id="buttons-title">새로운 할일</Title>
     <Content id="buttons-content" style={"width:400px; padding: 14px"}>
