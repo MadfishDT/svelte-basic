@@ -1,5 +1,5 @@
 export interface iTodo {
-    id: number;
+    id?: number;
     desc?: string;
     name: string;
     date: Date;

@@ -2,7 +2,7 @@
     import TodoCard from "./TodoCard.svelte";
     import { datas } from "./store";
     import type { Todos } from "./interface";
-     
+
     let todos: Todos = [];
 
     datas.subscribe((value) => {
@@ -12,7 +12,7 @@
 
 <main>
     {#each todos as item}
-        <TodoCard info={item} />
+        <TodoCard bind:info={item} />
     {/each}
 </main>
 

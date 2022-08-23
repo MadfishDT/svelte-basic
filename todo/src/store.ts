@@ -10,6 +10,13 @@ datas.subscribe((value) => {
     todos = value;
 });
 
+export const addTodo = (item: iTodo) => {
+    const newDatas = [...get(datas)];
+    item.id = newDatas.length;
+    newDatas.push(item);
+    datas.set(newDatas);
+};
+
 export const favorite = (item: iTodo) => {
     const current = get(datas);
     const index = current.findIndex((i) => i.id == item.id);
